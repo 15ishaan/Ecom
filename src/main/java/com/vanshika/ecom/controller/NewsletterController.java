@@ -27,6 +27,7 @@ public class NewsletterController {
     private RegistrationRepository userRepo;
 
     @GetMapping("/addService/{username}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<String> addNewsletterService(@PathVariable String username){
         newsletterService.sendNewsletter(username);
         return new ResponseEntity<String>("You have been added successfully to ClickNShip's Newsletter service.", HttpStatus.OK);

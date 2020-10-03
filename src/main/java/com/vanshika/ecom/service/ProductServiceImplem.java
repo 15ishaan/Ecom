@@ -52,7 +52,7 @@ public class ProductServiceImplem implements ProductService {
         return productRepository.findUsingSubCategory(subCategory);
     }
 
-    @Override
+   @Override
     public Iterable<Product> findUsingCategoryAndSubCategory(String category, String subCategory) {
         return productRepository.findUsingCategoryAndSubCategory(category, subCategory);
     }

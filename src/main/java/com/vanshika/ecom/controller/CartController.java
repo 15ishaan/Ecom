@@ -1,8 +1,7 @@
 package com.vanshika.ecom.controller;
 
-import com.vanshika.ecom.model.CartRequest;
-import com.vanshika.ecom.model.Product;
-import com.vanshika.ecom.model.User;
+import com.vanshika.ecom.model.*;
+import com.vanshika.ecom.repository.OrderHistoryRepository;
 import com.vanshika.ecom.repository.ProductRepository;
 import com.vanshika.ecom.repository.RegistrationRepository;
 import com.vanshika.ecom.service.EmailService;
@@ -34,6 +33,9 @@ public class CartController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private OrderHistoryRepository orderHistoryRepo;
 
     @PostMapping("/addToCart")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -235,6 +237,10 @@ public class CartController {
             product.setStock(product.getStock()-amt);
             prodRepo.save(product);
         }
+
+        OrderHistory orderHistory= new OrderHistory(user, user.getCart(), user.getCartProdAmt(), user.getBillingAmt());
+        orderHistoryRepo.save(orderHistory);
+
 
         //clearing cart
         user.setCart("");

@@ -150,6 +150,7 @@ public class RegistrationController {
 
     //Returning user details using his/her username.
     @GetMapping("/user/{username}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public User findUser(@PathVariable String username){
         User user = service.fetchUserByUsername(username);
         return user;
