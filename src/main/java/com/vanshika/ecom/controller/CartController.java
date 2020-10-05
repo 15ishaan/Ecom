@@ -228,9 +228,19 @@ public class CartController {
             mailMessage.setTo(product.getSellerUsername());
             mailMessage.setSubject("Product sold!");
             mailMessage.setFrom("gomailsender@gmail.com");
-            mailMessage.setText("Hello seller! Your product with following specifications:\n\nProduct Name: " + product.getName() + "\nProduct Category: " + product.getCategory() + "\nProduct Subcategory: "
-                    + product.getSubCategory() + "\nProduct Quantity: " + amt + "\nProduct Price: " + product.getPrice() + "\nTotal Amount: " + amt*product.getPrice()
-                            +  "\n\nhas been sold. Thank you for your cooperation. \n\n\n\nRegards: @Team ClickNShip.");
+            if(product.getStock()-amt < 3){
+
+                mailMessage.setText("Hello seller! Your product with following specifications:\n\nProduct Name: " + product.getName() + "\nProduct Category: " + product.getCategory() + "\nProduct Subcategory: "
+                        + product.getSubCategory() + "\nProduct Quantity: " + amt + "\nProduct Price: " + product.getPrice() + "\nTotal Amount: " + amt*product.getPrice()
+                        +  "\n\nhas been sold.The stock of this product is quite low. Please replenish the stock to continue selling. Thank you for your cooperation. \n\n\n\nRegards: @Team ClickNShip.");
+
+            }
+            else{
+                mailMessage.setText("Hello seller! Your product with following specifications:\n\nProduct Name: " + product.getName() + "\nProduct Category: " + product.getCategory() + "\nProduct Subcategory: "
+                        + product.getSubCategory() + "\nProduct Quantity: " + amt + "\nProduct Price: " + product.getPrice() + "\nTotal Amount: " + amt*product.getPrice()
+                        +  "\n\nhas been sold. Thank you for your cooperation. \n\n\n\nRegards: @Team ClickNShip.");
+
+            }
 
             emailService.sendEmail(mailMessage);
 
@@ -238,6 +248,7 @@ public class CartController {
             prodRepo.save(product);
         }
 
+        //storing order details in order history
         OrderHistory orderHistory= new OrderHistory(user, user.getCart(), user.getCartProdAmt(), user.getBillingAmt());
         orderHistoryRepo.save(orderHistory);
 
