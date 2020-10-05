@@ -75,7 +75,7 @@ public class RegistrationController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("gomailsender@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
-                    +"http://91d7ddfbae13.ngrok.io/confirm-account?token="+confirmationToken.getConfirmationToken());
+                    +"http://0d8c55b48a6d.ngrok.io/confirm-account?token="+confirmationToken.getConfirmationToken());
 
             emailService.sendEmail(mailMessage);
 
@@ -97,7 +97,7 @@ public class RegistrationController {
             user.setEnabled(true);
             userRepository.save(user);
             ResponseEntity.status(200);
-            return ResponseEntity.ok(" Your account has been Successfully Verified!");
+            return ResponseEntity.ok("Your account has been successfully Verified!");
         } else {
             ResponseEntity.status(404);
             return ResponseEntity.notFound().build();
@@ -139,7 +139,7 @@ public class RegistrationController {
                 mailMessage.setSubject("Complete Registration!");
                 mailMessage.setFrom("gomailsender@gmail.com");
                 mailMessage.setText("This is new confirmation link, to confirm your account, please click here: "
-                        +"http://91d7ddfbae13.ngrok.io/confirm-account?token="+confirmationToken.getConfirmationToken()
+                        +"http://0d8c55b48a6d.ngrok.io/confirm-account?token="+confirmationToken.getConfirmationToken()
                         + "\n\n\n\nRegards: @Team ClickNShip");
 
                 emailService.sendEmail(mailMessage);

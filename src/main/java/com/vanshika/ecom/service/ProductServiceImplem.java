@@ -43,11 +43,6 @@ public class ProductServiceImplem implements ProductService {
     }
 
     @Override
-    public Iterable<Product> findUsingSellerUsername(String sellerUsername) {
-        return productRepository.findUsingSellerUsername(sellerUsername);
-    }
-
-    @Override
     public Iterable<Product> findUsingSubCategory(String subCategory) {
         return productRepository.findUsingSubCategory(subCategory);
     }
@@ -70,6 +65,34 @@ public class ProductServiceImplem implements ProductService {
     @Override
     public Iterable<Product> findByUsername(String sellerUsername) {
         return productRepository.findByUsername(sellerUsername);
+    }
+
+    @Override
+    public Iterable<Product> findFeaturedProducts() {
+        return productRepository.findFeaturedProducts();
+    }
+
+    @Override
+    public Iterable<Product> findPersonalisedProducts(String category) {
+        return productRepository.findPersonalisedProducts(category);
+    }
+
+    @Override
+    public Double getProductRating(Double rating, Long id){
+        Product product=productRepository.findProductUsingId(id);
+        Integer user=product.setTotalUser();
+        product.setTotalRating(rating);
+        Double totalRating=product.getTotalRating();
+        productRepository.setProductRating(totalRating, user, id);
+        if((totalRating/user)%1<0.5){
+            return Math.floor(totalRating/(double)user);
+        }
+        else if((totalRating/user)%1>0.5){
+            return Math.ceil(totalRating/(double)user);
+        }
+        else{
+            return (totalRating/(double)user);
+        }
     }
 
     public void addProduct(Product product){

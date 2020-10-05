@@ -23,9 +23,6 @@ public class CompressorService {
         }
         outputStream.close();
         byte[] outputData = outputStream.toByteArray();
-
-        System.out.println("Original: " + imageData.length / 1024 + " Kb");
-        System.out.println("Compressed: " + outputData.length / 1024 + " Kb");
         return outputData;
     }
 }

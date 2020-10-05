@@ -1,7 +1,6 @@
 package com.vanshika.ecom.controller;
 
 import com.vanshika.ecom.model.Product;
-import com.vanshika.ecom.repository.ProductRepository;
 import com.vanshika.ecom.service.ProductNotFoundException;
 import com.vanshika.ecom.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
     private ProductService productService;
-    private ProductRepository productRepository;
 
     @Autowired
     public ProductController(ProductService productService) {
@@ -65,17 +63,6 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/productSellerUsername/{sellerUsername}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<Iterable<Product>> getBySellerUsername(@PathVariable String sellerUsername) throws ProductNotFoundException {
-        try {
-            Iterable<Product> list = productService.findUsingSellerUsername(sellerUsername);
-            return new ResponseEntity<Iterable<Product>>(list, HttpStatus.OK);
-        }
-        catch (Exception e){
-            throw new ProductNotFoundException();
-        }
-    }
 
     @GetMapping("/productSubCategory/{subCategory}")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -125,9 +112,40 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/featuredProducts")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public ResponseEntity<Iterable<Product>> getFeaturedProducts() throws ProductNotFoundException{
+        try {
+            Iterable<Product> list = productService.findFeaturedProducts();
+            return new ResponseEntity<Iterable<Product>>(list, HttpStatus.OK);
+        }
+        catch (Exception e){
+            throw new ProductNotFoundException();
+        }
+    }
+
+    @GetMapping("/personalisedProducts/{category}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public ResponseEntity<Iterable<Product>> getPersonalisedProducts(@PathVariable String category) throws ProductNotFoundException{
+        try {
+            Iterable<Product> list = productService.findPersonalisedProducts(category);
+            return new ResponseEntity<Iterable<Product>>(list, HttpStatus.OK);
+        }
+        catch (Exception e){
+            throw new ProductNotFoundException();
+        }
+    }
+
+    @PostMapping("/rate/{rating}/id/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public Double rateProduct(@PathVariable Double rating, @PathVariable Long id){
+        Double rate=productService.getProductRating(rating, id);
+        return rate;
+    }
+
     @PostMapping("/addProduct")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public void createProduct(@RequestBody Product product){
+    public void createProduct(@RequestBody Product product) {
         productService.addProduct(product);
     }
 
@@ -136,9 +154,11 @@ public class ProductController {
     public Iterable<Product> getSellerProducts(@PathVariable("username") String sellerUsername) throws ProductNotFoundException {
         try {
             return productService.findByUsername(sellerUsername);
-        } catch (Exception e) {
+        }
+        catch(Exception e) {
             throw new ProductNotFoundException();
         }
     }
+
 }
 

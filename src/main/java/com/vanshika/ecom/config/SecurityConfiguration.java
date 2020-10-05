@@ -29,14 +29,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/console/**").permitAll()
+                .antMatchers("/api/products/addProduct").hasRole("Seller")
+                .antMatchers("/api/products/getSellerProduct/{username}").hasRole("Seller")
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //for jwtFilter
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
-
         httpSecurity.headers().frameOptions().disable();
-
     }
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception{

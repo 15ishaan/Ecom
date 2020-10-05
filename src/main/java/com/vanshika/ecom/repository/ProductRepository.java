@@ -4,7 +4,8 @@ import com.vanshika.ecom.model.Product;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.transaction.Transactional;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
@@ -23,9 +24,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query("select p from Product p where p.subCategory=:subCategory")
     Iterable<Product> findUsingSubCategory(String subCategory);
 
-    @Query("select p from Product p where p.sellerUsername=:sellerUsername")
-    Iterable<Product> findUsingSellerUsername(String sellerUsername);
-
     @Query("select p from Product p where p.category=:category and p.subCategory=:subCategory")
     Iterable<Product> findUsingCategoryAndSubCategory(String category, String subCategory);
 
@@ -35,8 +33,19 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query("select p from Product p where p.category=:category and p.prodType=:prodType")
     Iterable<Product> findUsingCategoryAndProductType(String category, String prodType);
 
-    @Query("select p.name, p.price, p.stock, p.seller, p.category, p.subCategory, p.fit, p.material, p.prodType from Product p where p.sellerUsername=:sellerUsername")
+    @Query("select p from Product p where p.sellerUsername=:sellerUsername")
     Iterable<Product> findByUsername(String sellerUsername);
+
+    @Query(nativeQuery=true, value="select * from PRODUCT order by RAND() LIMIT 8")
+    Iterable<Product> findFeaturedProducts();
+
+    @Query(nativeQuery=true, value="select * from PRODUCT where PRODUCT.category=:category order by RAND() LIMIT 8")
+    Iterable<Product> findPersonalisedProducts(String category);
+
+    @Transactional
+    @Modifying
+    @Query("update Product p set p.totalRating=:totalRating, p.totalUser=:totalUser where p.id=:id")
+    void setProductRating(Double totalRating, Integer totalUser, Long id);
 
     @Transactional
     @Modifying

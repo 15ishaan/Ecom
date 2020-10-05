@@ -22,8 +22,6 @@ public class DecompressorService {
         }
         outputStream.close();
         byte[] outputData = outputStream.toByteArray();
-        System.out.println("Compressed: " + compressedData.length / 1024 + " Kb");
-        System.out.println("Decompressed: " + outputData.length / 1024 + " Kb");
         return outputData;
     }
 }
