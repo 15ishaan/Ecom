@@ -20,5 +20,6 @@ public interface ProductService {
     Iterable<Product> findUsingProductType(String prodType);
     Iterable<Product> findUsingCategoryAndProductType(String category, String prodType);
     Iterable<Product> findByUsername(String sellerUsername);
+    Double getProductRating(Double rating, Long id);
     void addProduct(Product product);
 }

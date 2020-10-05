@@ -1,12 +1,13 @@
 package com.vanshika.ecom.repository;
 
 import com.vanshika.ecom.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.transaction.annotation.Transactional;
 
-public interface ProductRepository extends CrudRepository<Product, Long> {
+import javax.transaction.Transactional;
+
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p from Product p where p.name=:name")
     Iterable<Product> findUsingName(String name);
@@ -35,8 +36,13 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query("select p from Product p where p.category=:category and p.prodType=:prodType")
     Iterable<Product> findUsingCategoryAndProductType(String category, String prodType);
 
-    @Query("select p.name, p.price, p.stock, p.seller, p.category, p.subCategory, p.fit, p.material, p.prodType from Product p where p.sellerUsername=:sellerUsername")
+    @Query("select p from Product p where p.sellerUsername=:sellerUsername")
     Iterable<Product> findByUsername(String sellerUsername);
+
+    @Transactional
+    @Modifying
+    @Query("update Product p set p.totalRating=:totalRating, p.totalUser=:totalUser where p.id=:id")
+    void setProductRating(Double totalRating, Integer totalUser, Long id);
 
     @Transactional
     @Modifying

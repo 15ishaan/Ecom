@@ -176,7 +176,7 @@
     <collation id="161" parent="2" name="UKRAINIAN_UKRAINE"/>
     <collation id="162" parent="2" name="VIETNAMESE"/>
     <collation id="163" parent="2" name="VIETNAMESE_VIETNAM"/>
-    <sequence id="164" parent="4" name="SYSTEM_SEQUENCE_91FBB0C7_5F1E_4949_AFDD_342133892C23">
+    <sequence id="164" parent="4" name="SYSTEM_SEQUENCE_359D260F_F074_4973_9DE2_0E114C09E875">
       <ObjectId>4</ObjectId>
       <NameSurrogate>1</NameSurrogate>
       <CacheSize>32</CacheSize>
@@ -235,11 +235,19 @@
     </column>
     <column id="176" parent="165" name="PICBYTE">
       <Position>11</Position>
-      <DataType>VARCHAR(128)|0s</DataType>
+      <DataType>IMAGE|0s</DataType>
     </column>
     <column id="177" parent="165" name="SELLERUSERNAME">
       <Position>12</Position>
       <DataType>VARCHAR(128)|0s</DataType>
+    </column>
+    <column id="178" parent="165" name="TOTALRATING">
+      <Position>13</Position>
+      <DataType>DECIMAL|0s</DataType>
+    </column>
+    <column id="179" parent="165" name="TOTALUSER">
+      <Position>14</Position>
+      <DataType>INTEGER|0s</DataType>
     </column>
   </database-model>
 </dataSource>

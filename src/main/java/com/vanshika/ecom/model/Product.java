@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,13 +21,14 @@ public class Product {
 
     @Lob
     @Column(length = 1000)
-    private String picByte;
+    private byte[] picByte;
 
     private String fit;
     private String material;
     private String prodType;
     private String sellerUsername;
-
+    private double totalRating;
+    private int totalUser;
 
     public Product(Long id, @NotNull(message = "Product name is required.") String name, Double price, Integer stock, String seller, String category, String subCategory, String fit, String material, String prodType, String sellerUsername) {
         this.id = id;
@@ -41,6 +43,8 @@ public class Product {
         this.material=material;
         this.prodType=prodType;
         this.sellerUsername=sellerUsername;
+        this.totalRating=0.0;
+        this.totalUser=0;
     }
 
     public Product(@NotNull(message = "Product name is required.") String name, Double price, Integer stock, String seller, String category, String subCategory, String fit, String material, String prodType, String sellerUsername) {
@@ -55,6 +59,8 @@ public class Product {
         this.material=material;
         this.prodType=prodType;
         this.sellerUsername=sellerUsername;
+        this.totalRating=0.0;
+        this.totalUser=0;
     }
 
     public Product() {
@@ -116,11 +122,11 @@ public class Product {
         this.seller = seller;
     }
 
-    public String getPicByte() {
+    public byte[] getPicByte() {
         return picByte;
     }
 
-    public void setPicByte(String picByte) {
+    public void setPicByte(byte[] picByte) {
         this.picByte = picByte;
     }
 
@@ -154,5 +160,17 @@ public class Product {
 
     public void setSellerUsername(String sellerUsername) {
         this.sellerUsername = sellerUsername;
+    }
+
+    public Double getTotalRating(){
+        return totalRating;
+    }
+
+    public void setTotalRating(Double rating){
+        this.totalRating +=rating;
+    }
+
+    public Integer setTotalUser(){
+        return ++totalUser;
     }
 }

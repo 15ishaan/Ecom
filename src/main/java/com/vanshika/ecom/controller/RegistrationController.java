@@ -97,7 +97,7 @@ public class RegistrationController {
             user.setEnabled(true);
             userRepository.save(user);
             ResponseEntity.status(200);
-            return ResponseEntity.ok(" Your account has been Successfully Verified!");
+            return ResponseEntity.ok("Your account has been Successfully Verified!");
         } else {
             ResponseEntity.status(404);
             return ResponseEntity.notFound().build();

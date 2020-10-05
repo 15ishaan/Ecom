@@ -27,7 +27,6 @@ public class UserPrincipal implements UserDetails {
             System.out.println(role);
             authorities.add(new SimpleGrantedAuthority(role));
         }
-
         return authorities;
     }
 

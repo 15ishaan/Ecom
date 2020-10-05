@@ -26,17 +26,13 @@ public class ImageUpload {
     ProductRepository productRepository;
 
     @PostMapping("/image/{name}")
-    public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file,
-                                              @PathVariable String name) throws Exception {
-
+    public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file, @PathVariable String name) throws Exception {
         try {
-
             Product product = (Product) productService.findUsingName(name);
             byte[] fileContent = file.getBytes();
             byte[] compressed = imageCompress.compressImageBytes(fileContent);
             productRepository.setImageByteForProduct((product.getId()), compressed);
-            return new ResponseEntity<String>("Image compressed and stored", HttpStatus.OK);
-
+            return new ResponseEntity<String>("Image stored successfully", HttpStatus.OK);
         }
         catch (Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
