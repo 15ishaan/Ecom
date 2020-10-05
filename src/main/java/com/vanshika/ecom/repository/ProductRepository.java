@@ -24,9 +24,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select p from Product p where p.subCategory=:subCategory")
     Iterable<Product> findUsingSubCategory(String subCategory);
 
-    @Query("select p from Product p where p.sellerUsername=:sellerUsername")
-    Iterable<Product> findUsingSellerUsername(String sellerUsername);
-
     @Query("select p from Product p where p.category=:category and p.subCategory=:subCategory")
     Iterable<Product> findUsingCategoryAndSubCategory(String category, String subCategory);
 
@@ -38,6 +35,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p from Product p where p.sellerUsername=:sellerUsername")
     Iterable<Product> findByUsername(String sellerUsername);
+
+    @Query(nativeQuery=true, value="select * from PRODUCT order by RAND() LIMIT 8")
+    Iterable<Product> findFeaturedProducts();
+
+    @Query(nativeQuery=true, value="select * from PRODUCT where PRODUCT.category=:category order by RAND() LIMIT 8")
+    Iterable<Product> findPersonalisedProducts(String category);
 
     @Transactional
     @Modifying

@@ -43,11 +43,6 @@ public class ProductServiceImplem implements ProductService {
     }
 
     @Override
-    public Iterable<Product> findUsingSellerUsername(String sellerUsername) {
-        return productRepository.findUsingSellerUsername(sellerUsername);
-    }
-
-    @Override
     public Iterable<Product> findUsingSubCategory(String subCategory) {
         return productRepository.findUsingSubCategory(subCategory);
     }
@@ -70,6 +65,16 @@ public class ProductServiceImplem implements ProductService {
     @Override
     public Iterable<Product> findByUsername(String sellerUsername) {
         return productRepository.findByUsername(sellerUsername);
+    }
+
+    @Override
+    public Iterable<Product> findFeaturedProducts() {
+        return productRepository.findFeaturedProducts();
+    }
+
+    @Override
+    public Iterable<Product> findPersonalisedProducts(String category) {
+        return productRepository.findPersonalisedProducts(category);
     }
 
     @Override
