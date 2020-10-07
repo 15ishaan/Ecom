@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Query("select p from Product p where p.name=:name")
-    Iterable<Product> findUsingName(String name);
+    Product findUsingName(String name);
 
     @Query("select p from Product p where p.id=:id")
     Iterable<Product> findUsingId(Long id);

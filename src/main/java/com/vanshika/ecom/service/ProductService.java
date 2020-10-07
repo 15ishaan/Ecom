@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public interface ProductService {
 
     @NotNull Iterable<Product> getAllProducts();
-    Iterable<Product> findUsingName(String name);
+    Product findUsingName(String name);
     Iterable<Product> findUsingId(Long id);
     Product findProductUsingId(Long id);
     Iterable<Product> findUsingCategory(String category);

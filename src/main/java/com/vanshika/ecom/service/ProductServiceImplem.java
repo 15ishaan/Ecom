@@ -23,7 +23,7 @@ public class ProductServiceImplem implements ProductService {
     }
 
     @Override
-    public Iterable<Product> findUsingName(String name) {
+    public Product findUsingName(String name) {
         return productRepository.findUsingName(name);
     }
 

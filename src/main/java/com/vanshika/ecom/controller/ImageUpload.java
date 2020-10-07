@@ -2,7 +2,6 @@ package com.vanshika.ecom.controller;
 
 import com.vanshika.ecom.model.Product;
 import com.vanshika.ecom.repository.ProductRepository;
-import com.vanshika.ecom.service.CompressorService;
 import com.vanshika.ecom.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,18 +19,14 @@ public class ImageUpload {
     ProductService productService;
 
     @Autowired
-    CompressorService imageCompress;
-
-    @Autowired
     ProductRepository productRepository;
 
     @PostMapping("/image/{name}")
     public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file, @PathVariable String name) throws Exception {
         try {
-            Product product = (Product) productService.findUsingName(name);
+            Product product = productService.findUsingName(name);
             byte[] fileContent = file.getBytes();
-            byte[] compressed = imageCompress.compressImageBytes(fileContent);
-            productRepository.setImageByteForProduct((product.getId()), compressed);
+            productRepository.setImageByteForProduct((product.getId()), fileContent);
             return new ResponseEntity<String>("Image stored successfully", HttpStatus.OK);
         }
         catch (Exception e) {

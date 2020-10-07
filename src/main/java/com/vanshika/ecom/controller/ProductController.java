@@ -29,10 +29,10 @@ public class ProductController {
 
     @GetMapping("/productName/{name}")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<Iterable<Product>> getByName(@PathVariable String name) throws ProductNotFoundException {
+    public ResponseEntity<Product> getByName(@PathVariable String name) throws ProductNotFoundException {
         try {
-            Iterable<Product> list = productService.findUsingName(name);
-            return new ResponseEntity<Iterable<Product>>(list, HttpStatus.OK);
+            Product list = productService.findUsingName(name);
+            return new ResponseEntity<Product>(list, HttpStatus.OK);
         }
         catch (Exception e){
             throw new ProductNotFoundException();
