@@ -206,7 +206,7 @@ public class CartController {
        return list;
     }
 
-    @GetMapping("/orderPlaced/{username}")
+    /*@GetMapping("/orderPlaced/{username}")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<?> orderPlaced(@PathVariable String username){
         User user = service.fetchUserByUsername(username);
@@ -231,13 +231,13 @@ public class CartController {
             if(product.getStock()-amt < 3){
 
                 mailMessage.setText("Hello seller! Your product with following specifications:\n\nProduct Name: " + product.getName() + "\nProduct Category: " + product.getCategory() + "\nProduct Subcategory: "
-                        + product.getSubCategory() + "\nProduct Quantity: " + amt + "\nProduct Price: " + product.getPrice() + "\nTotal Amount: " + amt*product.getPrice()
+                        + product.getSubCategory() + "\nProduct Quantity: " + amt + "\nProduct Price: Rs." + product.getPrice() + "\nTotal Amount: Rs." + amt*product.getPrice()
                         +  "\n\nhas been sold.The stock of this product is quite low. Please replenish the stock to continue selling. Thank you for your cooperation. \n\n\n\nRegards: @Team ClickNShip.");
 
             }
             else{
                 mailMessage.setText("Hello seller! Your product with following specifications:\n\nProduct Name: " + product.getName() + "\nProduct Category: " + product.getCategory() + "\nProduct Subcategory: "
-                        + product.getSubCategory() + "\nProduct Quantity: " + amt + "\nProduct Price: " + product.getPrice() + "\nTotal Amount: " + amt*product.getPrice()
+                        + product.getSubCategory() + "\nProduct Quantity: " + amt + "\nProduct Price: Rs. " + product.getPrice() + "\nTotal Amount: Rs." + amt*product.getPrice()
                         +  "\n\nhas been sold. Thank you for your cooperation. \n\n\n\nRegards: @Team ClickNShip.");
 
             }
@@ -263,8 +263,8 @@ public class CartController {
         mailMessage.setTo(user.getUsername());
         mailMessage.setSubject("Order Placed successful");
         mailMessage.setFrom("gomailsender@gmail.com");
-        mailMessage.setText("Hello " + user.getFirstName() + "!\n\n ThankYou for shopping with us!! Your order has been successfully placed. Your total billing amount: $"
-         + user.getBillingAmt() + "\n\n P.s. Your order won't be delivered to you due to delivery and payment issues. For further information contact our Customer Service. We hope to see you soon!\n\n\n\nRegards: @Team ClickNShip");
+        mailMessage.setText("Hello " + user.getFirstName() + "!\n\n ThankYou for shopping with us!! Your order has been successfully placed. Your total billing amount: Rs."
+         + user.getBillingAmt() + 50.0 + "\n\n P.s. Your order won't be delivered to you due to delivery and payment issues. For further information contact our Customer Service. We hope to see you soon!\n\n\n\nRegards: @Team ClickNShip");
 
         emailService.sendEmail(mailMessage);
 
@@ -274,7 +274,7 @@ public class CartController {
         userRepo.save(user);
 
         return ResponseEntity.ok("Your total bill amount is: " + amtPayable);
-    }
+    }*/
 
     @PostMapping("/doesProductExistInCart")
     @CrossOrigin(origins = "*", allowedHeaders = "*")

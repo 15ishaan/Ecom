@@ -35,6 +35,11 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-configuration-processor', version: '2.3.3.RELEASE'
     compile group: 'javax.validation', name: 'validation-api', version: '1.0.CR2'
     compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
+    compile group: 'com.stripe', name: 'stripe-java', version: '20.14.0'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.3.4.RELEASE'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
