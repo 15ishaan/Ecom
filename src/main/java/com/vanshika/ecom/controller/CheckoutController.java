@@ -52,7 +52,8 @@ public class CheckoutController {
     private OrderHistoryRepository orderHistoryRepo;
 
 
-    @RequestMapping("/checkout/{username}")
+    @GetMapping("/checkout/{username}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public String checkout(@PathVariable("username") String username, Model model) {
 
         User user = service.fetchUserByUsername(username);
@@ -127,6 +128,7 @@ public class CheckoutController {
     }
 
     @PostMapping("/charge")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public String charge(ChargeRequest chargeRequest, Model model)
             throws StripeException {
         chargeRequest.setCurrency(ChargeRequest.Currency.INR);
@@ -137,6 +139,7 @@ public class CheckoutController {
     }
 
     @ExceptionHandler(StripeException.class)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public String handleError(Model model, StripeException ex) {
         model.addAttribute("error", ex.getMessage());
         return "result";

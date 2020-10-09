@@ -4,9 +4,10 @@
     <title>Checkout</title>
 </head>
 <body>
-<form action='/charge' method='POST' id='checkout-form'>
+<form action='/charge/' method='POST' id='checkout-form'>
     <input type='hidden' th:value='${amount}' name='amount' />
     <label>Price:<span th:text='${amount/100}' /></label>
+<!--    <img src="https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?cs=srgb&dl=pexels-jill-wellington-40815.jpg&fm=jpg">-->
     <script
             src='https://checkout.stripe.com/checkout.js'
             class='stripe-button'
