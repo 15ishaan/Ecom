@@ -206,7 +206,7 @@ public class CartController {
        return list;
     }
 
-    /*@GetMapping("/orderPlaced/{username}")
+    @GetMapping("/orderPlaced/{username}")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<?> orderPlaced(@PathVariable String username){
         User user = service.fetchUserByUsername(username);
@@ -274,7 +274,7 @@ public class CartController {
         userRepo.save(user);
 
         return ResponseEntity.ok("Your total bill amount is: " + amtPayable);
-    }*/
+    }
 
     @PostMapping("/doesProductExistInCart")
     @CrossOrigin(origins = "*", allowedHeaders = "*")

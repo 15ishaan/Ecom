@@ -27,7 +27,7 @@ import java.util.List;
 @Controller
 public class CheckoutController {
 
-    @Value("${STRIPE_PUBLIC_KEY}")
+  /*  @Value("${STRIPE_PUBLIC_KEY}")
     private String stripePublicKey;
 
     @Autowired
@@ -160,5 +160,5 @@ public class CheckoutController {
             }
         }
         return list;
-    }
+    }*/
 }

@@ -1,9 +1,19 @@
 package com.vanshika.ecom.model;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class EditUserRequest {
 
     private String Username;
+
+    @Pattern(
+            regexp = "^[a-zA-Z_-]{3,30}$",
+            message = "Enter valid first name"
+    )
     private String firstName;
+
+    @Size(min = 3, max = 30)
     private String lastName;
     private String gender;
 

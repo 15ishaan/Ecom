@@ -75,7 +75,7 @@ public class RegistrationController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("gomailsender@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
-                    +"http://0d8c55b48a6d.ngrok.io/confirm-account?token="+confirmationToken.getConfirmationToken());
+                    +"http://1779ff5e5c3d.ngrok.io/confirm-account?token="+confirmationToken.getConfirmationToken());
 
             emailService.sendEmail(mailMessage);
 

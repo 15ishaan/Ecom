@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ChargeRequest {
 
-    public enum Currency {
+   /* public enum Currency {
         INR, USD;
     }
     private int amount;
@@ -43,5 +43,5 @@ public class ChargeRequest {
 
     public void setStripeToken(String stripeToken) {
         this.stripeToken = stripeToken;
-    }
+    }*/
 }

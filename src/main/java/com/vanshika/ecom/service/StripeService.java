@@ -15,7 +15,7 @@ import java.util.Map;
 @Service
 public class StripeService {
 
-    @Value("${STRIPE_SECRET_KEY}")
+ /*   @Value("${STRIPE_SECRET_KEY}")
     private String secretKey;
 
     @PostConstruct
@@ -28,5 +28,5 @@ public class StripeService {
         chargeParams.put("currency", chargeRequest.getCurrency());
         chargeParams.put("source", chargeRequest.getStripeToken());
         return Charge.create(chargeParams);
-    }
+    }*/
 }

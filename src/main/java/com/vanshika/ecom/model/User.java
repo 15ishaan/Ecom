@@ -4,6 +4,7 @@ import com.vanshika.ecom.validation.ValidEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
@@ -15,11 +16,14 @@ public class User {
     private int id;
 
     @NotNull(message = "Enter your first name")
-    @Size(min = 2, max = 30)
+    @Pattern(
+            regexp = "^[a-zA-Z_-]{3,30}$",
+            message = "Enter valid name"
+    )
     private String firstName;
 
     @NotNull(message = "Enter your last name")
-    @Size(min = 2, max = 30)
+    @Size(min = 3, max = 30)
     private String lastName;
 
     @NotNull(message = "Enter your Gender")
